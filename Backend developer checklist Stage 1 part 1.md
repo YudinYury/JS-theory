@@ -102,15 +102,15 @@ class Foo {
   static bar() {return 'I am static.'}
 }
 
-//`bar` is a property of the class
+//'bar' is a property of the class
 Foo.bar() // returns 'I am static.'
 
-//`bar` is not a property of instances of the class
+//'bar' is not a property of instances of the class
 var foo = new Foo()
 foo.bar() //-> throws TypeError
 
 
-class MyClass {
+`class MyClass {
     constructor() {
         this._privateVariable = "Private variable";  // Private variable 
         this.publicVariable = "Public variable";  // Public variable 
@@ -121,7 +121,7 @@ class MyClass {
     set privateVariable(val) {
         this._privateVariable = (val < 0) ? 0 : val;
     };
-}
+}`
 
 
 ****************************************************************************
