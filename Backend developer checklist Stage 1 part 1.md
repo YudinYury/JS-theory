@@ -55,9 +55,11 @@ https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/static
 
 `StaticMethodCall.anotherStaticMethod();  //  'Вызван статический метод из другого статического метода'`
 
-Статические методы недоступны напрямую, используя ключевое слово this из нестатических методов. 
-Вам нужно вызвать их с помощью имени класса: CLASSNAME.STATIC_METHOD_NAME() или вызовом 
-метода как свойства конструктора: this.constructor.STATIC_METHOD_NAME().
+Статические методы недоступны через ключевое слово this из нестатических методов. Нужно вызвать их с помощью имени класса: 
+
+```CLASSNAME.STATIC_METHOD_NAME()``` 
+или вызовом метода как свойства конструктора: 
+```this.constructor.STATIC_METHOD_NAME()```.
 
 class StaticMethodCall {
   constructor() {
