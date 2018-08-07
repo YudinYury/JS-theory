@@ -92,8 +92,9 @@ function Singleton() {
 Singleton.prototype.test = function() {};
 
 console.assert(new Singleton() === new Singleton());
+```
 Наиболее короткий вариант.
-
+```
 const Singleton = new (function() {
   const instance = this;
   return function() { return instance; };
