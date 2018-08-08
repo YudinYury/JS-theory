@@ -169,7 +169,9 @@ interface SocialHubConnect { PushNewPost() {} }
 
 class VkHTTP implements SocialHubConnect { PushNewPost(newPost) {  return axios.get(newPost); } }
 class VkGraphQL implements SocialHubConnect { PushNewPost(newPost) { return axios.gql(newPost); } }
-class FacebookGraphQL implements SocialHubConnect { PushNewPost(newPost) { return axios.gql(newPost); } }
+class FacebookGraphQL implements SocialHubConnect { 
+    PushNewPost(newPost) { return axios.gql(newPost); } 
+}
 
 class FactoryCreator { public abstract FactoryMethod() {} }
 
