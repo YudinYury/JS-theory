@@ -46,37 +46,41 @@ amazing(); // => bar
 #### Array.from.
 Статические методы Array.from и Array.of — дженерики, если они запущены в контексте функции, отличной от Array, они создают её инстансы. 
 Array.from. - Это универсальное приведение к массиву  итерируемых и array-like объектов. Во большинстве случаев он заменит Array.prototype.slice.call без указания начальной и конечной позиций. Дополнительно, метод принимает опциональный map-коллбэк и контекст его исполнения. 
-`Array.from(new Set([1, 2, 3, 2, 1]));      // => [1, 2, 3]`
-`Array.from({0: 1, 1: 2, 2: 3, length: 3}); // => [1, 2, 3]`
-`Array.from('123', Number);                 // => [1, 2, 3]`
+```
+Array.from(new Set([1, 2, 3, 2, 1]));      // => [1, 2, 3]
+Array.from({0: 1, 1: 2, 2: 3, length: 3}); // => [1, 2, 3]
+Array.from('123', Number);                 // => [1, 2, 3]
 Array.from('123', function(it){
   return it * it;
 });    
-
+```
 
 #### Array.of 
 на текущий момент практически бесполезен. Он нужен, в первую очередь, для подклассов Array, как аналог литерала массива []. Пример:
-
-`Array.of(1);       // => [1]`
-`Array.of(1, 2, 3); // => [1, 2, 3]`
+```
+Array.of(1);       // => [1]
+Array.of(1, 2, 3); // => [1, 2, 3]
+```
 
 # Методы Array#find и Array#findIndex осуществляют поиск по массиву через вызов коллбэка. Пример:
-
+```
 function isOdd(val){
   return val % 2;
 }
-`[4, 8, 15, 16, 23, 42].find(isOdd);      // => 15`
-`[4, 8, 15, 16, 23, 42].findIndex(isOdd); // => 2`
-`[4, 8, 15, 16, 23, 42].find(isNaN);      // => undefined`
-`[4, 8, 15, 16, 23, 42].findIndex(isNaN); // => -1`
+[4, 8, 15, 16, 23, 42].find(isOdd);      // => 15
+[4, 8, 15, 16, 23, 42].findIndex(isOdd); // => 2
+[4, 8, 15, 16, 23, 42].find(isNaN);      // => undefined
+[4, 8, 15, 16, 23, 42].findIndex(isNaN); // => -1
+```
 
 #### Array#fill 
 заполняет массив переданным значением. Опциональные аргументы — стартовая и конечная позиции. Пример:
-
+```
 Array(5).map(function(){
   return 42;
 });                // => [undefined × 5], потому как .map пропускает "дырки" в массиве
-`Array(5).fill(42); // => [42, 42, 42, 42, 42]`
+Array(5).fill(42); // => [42, 42, 42, 42, 42]
+```
 
 # Методы строки
 Тут всё просто. 
@@ -85,80 +89,80 @@ Array(5).map(function(){
 #### String#startsWith 
 #### String#endsWith 
 проверяют, начинается ли или заканчивается ли строка на заданную подстроку. Эти 3 метода принимают дополнительный аргумент — стартовую позицию. Пример:
-
-`'foobarbaz'.includes('bar');      // => true`
-`'foobarbaz'.includes('bar', 4);   // => false`
-`'foobarbaz'.startsWith('foo');    // => true`
-`'foobarbaz'.startsWith('bar', 3); // => true`
-`'foobarbaz'.endsWith('baz');      // => true`
-`'foobarbaz'.endsWith('bar', 6);   // => true`
+```
+'foobarbaz'.includes('bar');      // => true
+'foobarbaz'.includes('bar', 4);   // => false
+'foobarbaz'.startsWith('foo');    // => true
+'foobarbaz'.startsWith('bar', 3); // => true
+'foobarbaz'.endsWith('baz');      // => true
+'foobarbaz'.endsWith('bar', 6);   // => true
+```
 
 #### String#repeat 
 возвращает строку, повторенную заданное число раз. Пример:
-
-`'string'.repeat(3); // => 'stringstringstring'`
-
+```
+'string'.repeat(3); // => 'stringstringstring'
+```
 
 #### Object.is
 Операторы сравнения в JavaScript вообще довольно странно себя ведут. Забудем даже такой оператор, как == с его приведениями, посмотрим на ===:
-
-`NaN === NaN  // => false`
-`0 === -0     // => true`, но при этом:
-`1/0 === 1/-0 // => false`
+NaN === NaN  // => false
+0 === -0     // => true, но при этом:
+1/0 === 1/-0 // => false
 
 Как раз для этого случая, в языке есть внутренний алгоритм сравнения SameValue. Для него NaN равен NaN, а +0 и -0 различны. В ECMAScript 6 его хотели вынести наружу как операторы is и isnt, но, похоже, поняв, что операторов сравнения в языке уже и так не мало, да и для обратной совместимости, вынесли как метод Object.is. Пример:
-
-`Object.is(NaN, NaN); // => true`
-`Object.is(0, -0);    // => false`
-`Object.is(42, 42);   // => true, аналогично '==='`
-`Object.is(42, '42'); // => false, аналогично '==='`
-
+```
+Object.is(NaN, NaN); // => true
+Object.is(0, -0);    // => false
+Object.is(42, 42);   // => true, аналогично '==='
+Object.is(42, '42'); // => false, аналогично '==='
+```
 Также в ES6 и далее активно используется другой алгоритм сравнения — SameValueZero, для которого NaN равен NaN, и, в отличии от предыдущего, -0 равен +0. Им обеспечивается уникальность ключа  коллекций, он применяется при проверке вхождения элемента в коллекцию через # Array#includes.
 
 
 #### Map
 коллекция ключ — значение, в качестве ключей могут выступать любые сущности JavaScript — как примитивы, так и объекты. Есть возможность обхода — имеют # итераторы и метод .forEach, количество элементов доступно через свойство .size. Пример:
+```
+var a = [1];
 
-`var a = [1];`
+var map = new Map([['a', 1], [42, 2]]);
+map.set(a, 3).set(true, 4);
 
-`var map = new Map([['a', 1], [42, 2]]);`
-`map.set(a, 3).set(true, 4);`
-
-`console.log(map.size);        // => 4`
-`console.log(map.has(a));      // => true`
-`console.log(map.has([1]));    // => false`
-`console.log(map.get(a));      // => 3`
+console.log(map.size);        // => 4
+console.log(map.has(a));      // => true
+console.log(map.has([1]));    // => false
+console.log(map.get(a));      // => 3
 map.forEach(function(val, key){
   console.log(val);           // => 1, 2, 3, 4
   console.log(key);           // => 'a', 42, [1], true
 });
-`map.delete(a);`
-`console.log(map.size);        // => 3`
-`console.log(map.get(a));      // => undefined`
-`console.log(Array.from(map)); // => [['a', 1], [42, 2], [true, 4]]`
+map.delete(a);
+console.log(map.size);        // => 3
+console.log(map.get(a));      // => undefined
+console.log(Array.from(map)); // => [['a', 1], [42, 2], [true, 4]]
 
-`const cars = {'BMW':3, "Tesla": 2, "Toyota": 1};`
-`const map = new Map(Object.entries(car));`
-`console.log(map);  //  Map { 'BMW':3, "Tesla": 2, "Toyota": 1 }`
-
+const cars = {'BMW':3, "Tesla": 2, "Toyota": 1};
+const map = new Map(Object.entries(car));
+console.log(map);  //  Map { 'BMW':3, "Tesla": 2, "Toyota": 1 }
+```
 
 #### Set
 коллекция уникальных значений. Как и у Map, есть возможность обхода. Пример:
-
-`var set = new Set(['a', 'b', 'a', 'c']);`
-`set.add('d').add('b').add('e');`
-`console.log(set.size);        // => 5`
-`console.log(set.has('b'));    // => true`
-`set.forEach(function(it){  console.log(it);            // => 'a', 'b', 'c', 'd', 'e'  });`
-`set.delete('b');`
-`console.log(set.size);        // => 4`
-`console.log(set.has('b'));    // => false`
-`console.log(Array.from(set)); // => ['a', 'c', 'd', 'e']`
-
+```
+var set = new Set(['a', 'b', 'a', 'c']);
+set.add('d').add('b').add('e');
+console.log(set.size);        // => 5
+console.log(set.has('b'));    // => true
+set.forEach(function(it){  console.log(it);            // => 'a', 'b', 'c', 'd', 'e'  });
+set.delete('b');
+console.log(set.size);        // => 4
+console.log(set.has('b'));    // => false
+console.log(Array.from(set)); // => ['a', 'c', 'd', 'e']
+```
 
 #### Iterator
 объект, имеющий метод .next, который должен возвращать объект с полями .done — завершен ли обход итератора, и .value — значение текущего шага. Пример — метод, создающий итератор для положительного числа, позволяющий обойти все целые от 0 до заданного:
-
+```
 function NumberIterator(number){
   var i = 0;
   return {
@@ -169,44 +173,45 @@ function NumberIterator(number){
     }
   }
 }
-
+```
 
 #### Генератор
 это — функция, выполнение которой можно приостановить. Возвращает объект с расширенным интерфейсом итератора. 
-
+```
 Number.prototype[Symbol.iterator] = function*(){
   for(var i = 0; i < this;)yield i++;
 }
 
-`Array.from(10); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]`
-
+Array.from(10); // => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+```
 
 к протоколу итераторов относятся и array / generator comprehensions (абстракция массива / генератора?). Раньше они присутствовали в черновике ECMAScript 6, но отложены до ECMAScript 7
+```
+var ar1 = [for(i of [1, 2, 3])i * i];    // => [1, 4, 9]
 
-`var ar1 = [for(i of [1, 2, 3])i * i];    // => [1, 4, 9]`
+var set = new Set([1, 2, 3, 2, 1]);
+var ar2 = [for(i of set)if(i % 2)i * i]; // => [1, 9]
 
-`var set = new Set([1, 2, 3, 2, 1]);`
-`var ar2 = [for(i of set)if(i % 2)i * i]; // => [1, 9]`
+var iter = (for(i of set)if(i % 2)i * i);
+iter.next(); // => {value: 1, done: false}
+iter.next(); // => {value: 9, done: false}
+iter.next(); // => {value: undefined, done: true}
 
-`var iter = (for(i of set)if(i % 2)i * i);`
-`iter.next(); // => {value: 1, done: false}`
-`iter.next(); // => {value: 9, done: false}`
-`iter.next(); // => {value: undefined, done: true}`
-
-`var map1 = new Map([['a', 1], ['b', 2], ['c', 3]]);`
-`var map2 = new Map((for([k, v] of map1)if(v % 2)[k + k, v * v])); // => Map {aa: 1, cc: 9}`
-
+var map1 = new Map([['a', 1], ['b', 2], ['c', 3]]);
+var map2 = new Map((for([k, v] of map1)if(v % 2)[k + k, v * v])); // => Map {aa: 1, cc: 9}
+```
 
 # Цикл for-of 
 предназначен для обхода итерируемых объектов. На нашем примере с итерируемыми числами он работает так (песочница):
 
-`for(var num of 5)console.log(num); // => 0, 1, 2, 3, 4`
+for(var num of 5)console.log(num); // => 0, 1, 2, 3, 4
 
 В ECMAScript 6 итерируемы String, Array, Map, Set и Arguments. Кроме того, Array, Map и Set имеют методы .keys, .values и .entries, которые возвращают итераторы соответственно по ключам, значениям и паре ключ-значение. Core.js добавляет данные итераторы и методы. Вместе с циклом for-of это выглядит так (песочница):
 
 
 #### Promise
-`var log = console.log.bind(console);`
+```
+var log = console.log.bind(console);
 function sleepRandom(time){
   return new Promise(function(resolve, reject){
     // resolve разрешает обещание успешно, reject - с ошибкой
@@ -215,7 +220,7 @@ function sleepRandom(time){
   });
 }
 
-`log('Поехали');                // => Поехали`
+log('Поехали');                // => Поехали
 sleepRandom(5).then(function(result){
   log(result);                 // => 869, через 5 сек.
   return sleepRandom(10);
@@ -227,16 +232,15 @@ sleepRandom(5).then(function(result){
 }).then(function(){
   log('не будет выведено - ошибка');
 }).catch(log);                 // => Error: 'Ашыпка!'
-
+```
 
 #### Promise.all 
 возвращает обещание, которое разрешится, когда разрешатся все обещания из переданной ему # итерируемой коллекции (в v8 сейчас работает только с массивами
+```
 Promise.all([
   'foo',
   sleepRandom(5),
   sleepRandom(15),
   sleepRandom(10)  // через 15 секунд выведет что-то вроде
 ]).then(log);      // => ['foo', 956, 85, 382]
-
-
-
+```
