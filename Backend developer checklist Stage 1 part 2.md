@@ -173,7 +173,7 @@ class FacebookGraphQL implements SocialHubConnect {
     PushNewPost(newPost) { return axios.gql(newPost); } 
 }
 
-class FactoryCreator { public abstract FactoryMethod() {} }
+class FactoryCreator { public abstract SocialConnect() {} }
 
 class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
 class GraphQLFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkGraphQL() } }
@@ -186,7 +186,7 @@ const advertizingChannels = [ new HTTPFactoryCreator(), new GraphQLFactoryCreato
         new GraphQLFacebookFactoryCreator() ]
 // Iterate over creators and make newPost for all advertizing channels
 for (let point of advertizingChannels) {
-    point.FactoryMethod().PushNewPost('newPost - Hello world');
+    point.SocialConnect().PushNewPost('newPost - Hello world');
 }
 ```
 
