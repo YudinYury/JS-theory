@@ -165,23 +165,24 @@ console.log(products)
 ```
 
 ```
-interface SocialHubConnect { GetVkUserName() {} }
+interface SocialHubConnect { PushNewPost() {} }
 
-class VkHTTP implements SocialHubConnect { GetVkUserName() {  return axios.get('getname'); } }
-class VkGraphQL implements SocialHubConnect { GetVkUserName() { return axios.gql('getUserName'); } }
+class VkHTTP implements SocialHubConnect { PushNewPost(newPost) {  return axios.get(newPost); } }
+class VkGraphQL implements SocialHubConnect { PushNewPost(newPost) { return axios.gql(newPost); } }
+class FacebookGraphQL implements SocialHubConnect { PushNewPost(newPost) { return axios.gql(newPost); } }
 
 class FactoryCreator { public abstract FactoryMethod() {} }
+
 class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
 class GraphQLFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkGraphQL() } }
+class GraphQLFacebookFactoryCreator extends FactoryCreator { FactoryMethod() { return new FacebookGraphQL() } }
 
 // An array of creators
-const creators = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator() ]
-const products = []
-// Iterate over creators and create products
-for (let creator of creators) {
-    names.push(creator.FactoryMethod().GetVkUserName())
+const advertizingChannels = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator(), new GraphQLFacebookFactoryCreator() ]
+// Iterate over creators and make newPost for all advertizing channels
+for (let point of advertizingChannels) {
+    creator.FactoryMethod().GetVkUserName('newPost - Hello worls');
 }
-console.log(products)
 ```
 
 #### АБСТРАКТНАЯ ФАБРИКА
