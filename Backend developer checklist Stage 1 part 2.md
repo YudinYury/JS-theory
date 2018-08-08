@@ -181,7 +181,7 @@ class GraphQLFacebookFactoryCreator extends FactoryCreator { FactoryMethod() { r
 const advertizingChannels = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator(), new GraphQLFacebookFactoryCreator() ]
 // Iterate over creators and make newPost for all advertizing channels
 for (let point of advertizingChannels) {
-    creator.FactoryMethod().GetVkUserName('newPost - Hello worls');
+    creator.FactoryMethod().PushNewPost('newPost - Hello worls');
 }
 ```
 
