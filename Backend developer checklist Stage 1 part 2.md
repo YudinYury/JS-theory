@@ -190,6 +190,7 @@ for (let point of advertizingChannels) {
 }
 ```
 
+
 #### АБСТРАКТНАЯ ФАБРИКА
 https://refactoring.guru/ru/design-patterns/abstract-factory
 https://refactoring.guru/ru/design-patterns/factory-comparison 
@@ -212,6 +213,7 @@ https://ru.wikipedia.org/wiki/%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D
 
 Минусы:
 - сложно добавить поддержку нового вида продуктов.
+
 
 ****************************************************************************
 ### MVC - Отношения между моделью, вьюхой и контроллером.
