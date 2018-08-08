@@ -175,10 +175,10 @@ class FacebookGraphQL implements SocialHubConnect {
 
 class FactoryCreator { public abstract SocialConnect() {} }
 
-class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
-class GraphQLFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkGraphQL() } }
+class HTTPFactoryCreator extends FactoryCreator { SocialConnect() { return new VkHTTP() } }
+class GraphQLFactoryCreator extends FactoryCreator { SocialConnect() { return new VkGraphQL() } }
 class GraphQLFacebookFactoryCreator extends FactoryCreator { 
-  FactoryMethod() { return new FacebookGraphQL() } 
+  SocialConnect() { return new FacebookGraphQL() } 
 }
 
 // An array of creators
