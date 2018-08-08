@@ -165,12 +165,12 @@ console.log(products)
 ```
 
 ```
-class VkRequest { GetVkUserName() {} }
+interface VkRequest { GetVkUserName() {} }
 
-class VkHTTP extends Request { GetVkUserName() {  return axios.get('getname'); } }
-class VkGraphQL extends Request { GetVkUserName() { return axios.gql('getUserName'); } }
+class VkHTTP implements Request { GetVkUserName() {  return axios.get('getname'); } }
+class VkGraphQL implements Request { GetVkUserName() { return axios.gql('getUserName'); } }
 
-class FactoryCreator { FactoryMethod() {} }
+class FactoryCreator { public abstract FactoryMethod() {} }
 class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
 class GraphQLFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkGraphQL() } }
 
