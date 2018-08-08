@@ -161,6 +161,25 @@ for (let creator of creators) {
 console.log(products)
 ```
 
+```
+class VkRequest { GetVkUserName() {} }
+
+class VkHTTP extends Request { GetName() {  return axios.get(); } }
+class VkGraphQL extends Request { GetName() { return axios.post(); } }
+
+class FactoryCreator { FactoryMethod() {} }
+class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
+class GraphQLFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkGraphQL() } }
+// An array of creators
+const creators = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator() ]
+const products = []
+// Iterate over creators and create products
+for (let creator of creators) {
+    names.push(creator.FactoryMethod().GetVkUserName())
+}
+console.log(products)
+```
+
 #### АБСТРАКТНАЯ ФАБРИКА
 https://ru.wikipedia.org/wiki/%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%B0%D1%8F_%D1%84%D0%B0%D0%B1%D1%80%D0%B8%D0%BA%D0%B0_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
 Абстрактная фабрика (англ. Abstract factory) — порождающий шаблон проектирования, предоставляет интерфейс 
