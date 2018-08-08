@@ -133,7 +133,7 @@ function Singleton() {
 запросы от него. "Посредник" реализует кооперативное поведение, пересылая каждый запрос одному или 
 нескольким "Коллегам".
 
-###№ ФАБРИЧНЫЙ МЕТОД (шаблон проектирования)
+#### ФАБРИЧНЫЙ МЕТОД (шаблон проектирования)
 (англ. Factory Method также известен как Виртуальный конструктор (англ. Virtual Constructor)) — 
 порождающий шаблон проектирования, предоставляющий подклассам интерфейс для создания экземпляров 
 некоторого класса. В момент создания наследники могут определить, какой класс создавать. 
@@ -143,18 +143,14 @@ function Singleton() {
   - класс спроектирован так, чтобы объекты, которые он создаёт, специфицировались подклассами.
   - класс делегирует свои обязанности одному из нескольких вспомогательных подклассов, и планируется 
   локализовать знание о том, какой класс принимает эти обязанности на себя
-`class Product { GetName() {} }
+```
+class Product { GetName() {} }
 
-class ConcreteProductA extends Product { GetName() { return 'ProductA' }
-}
-class ConcreteProductB extends Product { GetName() { return 'ProductB' }
-}
-class Creator { FactoryMethod() {}
-}
-class ConcreteCreatorA extends Creator { FactoryMethod() { return new ConcreteProductA() }
-}
-class ConcreteCreatorB extends Creator { FactoryMethod() { return new ConcreteProductB() }
-}
+class ConcreteProductA extends Product { GetName() { return 'ProductA' } }
+class ConcreteProductB extends Product { GetName() { return 'ProductB' } }
+class Creator { FactoryMethod() {} }
+class ConcreteCreatorA extends Creator { FactoryMethod() { return new ConcreteProductA() } }
+class ConcreteCreatorB extends Creator { FactoryMethod() { return new ConcreteProductB() } }
 // An array of creators
 const creators = [ new ConcreteCreatorA(), new ConcreteCreatorB() ]
 const products = []
@@ -162,8 +158,8 @@ const products = []
 for (let creator of creators) {
     products.push(creator.FactoryMethod().GetName())
 }
-console.log(products)`
-
+console.log(products)
+```
 
 #### АБСТРАКТНАЯ ФАБРИКА
 https://ru.wikipedia.org/wiki/%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%B0%D1%8F_%D1%84%D0%B0%D0%B1%D1%80%D0%B8%D0%BA%D0%B0_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
