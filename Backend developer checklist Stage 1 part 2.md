@@ -165,10 +165,10 @@ console.log(products)
 ```
 
 ```
-interface VkRequest { GetVkUserName() {} }
+interface SocialHubConnect { GetVkUserName() {} }
 
-class VkHTTP implements Request { GetVkUserName() {  return axios.get('getname'); } }
-class VkGraphQL implements Request { GetVkUserName() { return axios.gql('getUserName'); } }
+class VkHTTP implements SocialHubConnect { GetVkUserName() {  return axios.get('getname'); } }
+class VkGraphQL implements SocialHubConnect { GetVkUserName() { return axios.gql('getUserName'); } }
 
 class FactoryCreator { public abstract FactoryMethod() {} }
 class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
