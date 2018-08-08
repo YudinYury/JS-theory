@@ -163,7 +163,7 @@ for (let creator of creators) {
 }
 console.log(products)
 ```
-
+... и в новом варианте
 ```
 interface SocialHubConnect { PushNewPost() {} }
 
@@ -195,6 +195,7 @@ https://refactoring.guru/ru/design-patterns/abstract-factory
 https://refactoring.guru/ru/design-patterns/factory-comparison 
 
 https://ru.wikipedia.org/wiki/%D0%90%D0%B1%D1%81%D1%82%D1%80%D0%B0%D0%BA%D1%82%D0%BD%D0%B0%D1%8F_%D1%84%D0%B0%D0%B1%D1%80%D0%B8%D0%BA%D0%B0_(%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F)
+
 Абстрактная фабрика (англ. Abstract factory) — порождающий шаблон проектирования, предоставляет интерфейс 
 для создания семейств взаимосвязанных или взаимозависимых объектов, не специфицируя их конкретных классов. 
 Шаблон реализуется созданием абстрактного класса Factory, который представляет собой интерфейс для создания 
@@ -269,11 +270,13 @@ SOLID значит:
 и высота (height). 
 Теперь, взгляните на следующий псевдо-код:
 
-`rect = new Rectangle();
+```
+rect = new Rectangle();
 rect.width  = 10;
 rect.height = 20;
 assert 10 == rect.width
-assert 20 == rect.height`
+assert 20 == rect.height
+```
 
 Мы просто устанавливаем ширину width и высоту height на экземпляре Rectangle, и затем мы подтверждаем, что оба 
 свойства правильны. Пока все идет хорошо.
