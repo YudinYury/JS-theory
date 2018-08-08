@@ -186,7 +186,7 @@ const advertizingChannels = [ new HTTPFactoryCreator(), new GraphQLFactoryCreato
         new GraphQLFacebookFactoryCreator() ]
 // Iterate over creators and make newPost for all advertizing channels
 for (let point of advertizingChannels) {
-    creator.FactoryMethod().PushNewPost('newPost - Hello worls');
+    point.FactoryMethod().PushNewPost('newPost - Hello worls');
 }
 ```
 
