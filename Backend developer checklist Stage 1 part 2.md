@@ -163,7 +163,7 @@ for (let creator of creators) {
 }
 console.log(products)
 ```
-... и в новом варианте
+... и в новом варианте, а-ля TypeScript, но ьез указания типов:
 ```
 interface SocialHubConnect { PushNewPost() {} }
 
