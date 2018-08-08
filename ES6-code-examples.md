@@ -2,7 +2,41 @@
 
 #### Bind
 В Firefox и Chromium методы консоли должны быть запущены из контекста console, так что если нужно передать их в качестве коллбэка придется привязать — например, # console.log.bind(console). 
-`const print = console.log.bind(console);`
+```
+const print = console.log.bind(console);
+```
+
+// Немного надоедает использовать .call каждый раз. Может воспользоваться bind?
+// Точно! Давайте привяжем функцию call к контексту slice. 
+```
+slice = Function.prototype.call.bind(Array.prototype.slice);
+// Теперь slice использует первый аргумент в качестве контекста
+slice([1,2,3], 0, 1); // => [1]
+
+//
+// Неплохо, правда? Но у меня осталась еще кое-что.
+//
+
+// Давайте проделаем с самим bind то же,
+// что мы делали со slice
+var bind = Function.prototype.call.bind(Function.prototype.bind);
+
+// Обдумайте то, что мы только что сделали.
+// Что происходит? Мы оборачиваем call, возвращая функцию, которая принимает функцию и контекст
+// и возвращает связанную с контекстом функцию.
+
+// Вернемся к нашему первоначальному примеру
+var context = { foo: "bar" };
+function returnFoo () {
+  return this.foo;
+}
+
+// И к нашему новому bind
+var amazing = bind(returnFoo, context);
+amazing(); // => bar
+```
+
+
 
 #### for-in. 
 #### никогда не обходите массив циклом for-in. 
