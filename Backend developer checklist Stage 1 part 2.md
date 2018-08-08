@@ -175,10 +175,13 @@ class FactoryCreator { public abstract FactoryMethod() {} }
 
 class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
 class GraphQLFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkGraphQL() } }
-class GraphQLFacebookFactoryCreator extends FactoryCreator { FactoryMethod() { return new FacebookGraphQL() } }
+class GraphQLFacebookFactoryCreator extends FactoryCreator { 
+  FactoryMethod() { return new FacebookGraphQL() } 
+}
 
 // An array of creators
-const advertizingChannels = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator(), new GraphQLFacebookFactoryCreator() ]
+const advertizingChannels = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator(), 
+        new GraphQLFacebookFactoryCreator() ]
 // Iterate over creators and make newPost for all advertizing channels
 for (let point of advertizingChannels) {
     creator.FactoryMethod().PushNewPost('newPost - Hello worls');
