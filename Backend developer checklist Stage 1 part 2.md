@@ -173,6 +173,7 @@ class VkGraphQL extends Request { GetVkUserName() { return axios.gql('getUserNam
 class FactoryCreator { FactoryMethod() {} }
 class HTTPFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkHTTP() } }
 class GraphQLFactoryCreator extends FactoryCreator { FactoryMethod() { return new VkGraphQL() } }
+
 // An array of creators
 const creators = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator() ]
 const products = []
