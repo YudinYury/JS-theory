@@ -1,5 +1,7 @@
 .git
+.vscode
 .idea
+vscode
 
 # Log file
 *.log
@@ -7,6 +9,7 @@
 # Other Files #
 *.py
 *.db
+*.old
 *.txt
 *.json
 *.7z
