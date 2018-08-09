@@ -186,8 +186,10 @@ class GraphQLFacebookFactoryCreator extends FactoryCreator {
 }
 
 // An array of creators
-const advertizingChannels = [ new HTTPFactoryCreator(), new GraphQLFactoryCreator(), 
-        new GraphQLFacebookFactoryCreator() ]
+const advertizingChannels = [ new HTTPFactoryCreator()
+    , new GraphQLFactoryCreator()
+    , new GraphQLFacebookFactoryCreator() 
+    ]
 // Iterate over creators and make newPost for all advertizing channels
 for (let point of advertizingChannels) {
     point.SocialConnect().PushNewPost('newPost - Hello world');
