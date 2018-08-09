@@ -35,6 +35,14 @@ console.log(amazing('bind'));  // => bar
 console.log(returnFoo.call(context, 'call'));  // => bar
 console.log(returnFoo.apply(context, ['apply']));  // => bar
 
+interface Named {
+    name: string;
+}
+ 
+let x: Named;
+// выведенный для y тип — { name: string; location: string; }
+let y = { name: "Alice", location: "Seattle" };
+x = y;
 
 /*
 const barker = (state) => ({
