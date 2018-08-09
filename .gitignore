@@ -1,0 +1,21 @@
+.git
+.idea
+
+# Log file
+*.log
+
+# Other Files #
+*.py
+*.db
+*.txt
+*.json
+*.7z
+*.7zip
+*.zip
+*.tar.gz
+*.rar
+*.rtf
+*.docx
+*.pdf
+*.png
+
