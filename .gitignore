@@ -6,6 +6,9 @@ vscode
 # Log file
 *.log
 
+# Temp files #
+ts-example.js
+
 # Other Files #
 *.py
 *.db
