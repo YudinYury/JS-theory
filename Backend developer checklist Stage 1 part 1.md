@@ -41,36 +41,44 @@ https://learn.javascript.ru/static-properties-and-methods
 https://code-examples.net/ru/q/176e8f
 
 СТАТИЧЕСКОЕ ПОЛЕ хранит данные, специфичные не для одного объекта, а для всего класса  целиком. Как правило это константы.
-
-`private static instance: Config;`
+```
+private static instance: Config;
+```
 
 СТАТИЧЕСКИЙ МЕТОД: 
   * не использует состояние объекта и использует свойства, передаваемые в параметрах.
   * Статический метод также можно использовать для функций, которые вообще не требуют наличия объекта. Например, просто форматируем передаваемую дату.
   * Статический метод определяется ключевым словом static.
 
-`static staticMethod() { return 'Вызван статический метод'; }`
+```
+static staticMethod() { return 'Вызван статический метод'; }
+```
 
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/static
+```
+class StaticMethodCall {
+  static staticMethod() {
+    return 'Вызван статический метод';
+  }
+  static anotherStaticMethod() {
+    return StaticMethodCall.staticMethod() + ' из другого статического метода';
+  }
+}
+StaticMethodCall.staticMethod();  //  'Вызван статический метод'
 
-`class StaticMethodCall {`
-`  static staticMethod() {`
-`    return 'Вызван статический метод';`
-`  }`
-`  static anotherStaticMethod() {`
-`    return StaticMethodCall.staticMethod() + ' из другого статического метода';`
-`  }`
-`}`
-`StaticMethodCall.staticMethod();  //  'Вызван статический метод'`
-
-`StaticMethodCall.anotherStaticMethod();  //  'Вызван статический метод из другого статического метода'`
+StaticMethodCall.anotherStaticMethod();  //  'Вызван статический метод из другого статического метода
+```
 
 Статические методы недоступны через ключевое слово this из нестатических методов. Нужно вызвать их с помощью имени класса: 
-
-```CLASSNAME.STATIC_METHOD_NAME()``` 
+```
+CLASSNAME.STATIC_METHOD_NAME()
+```
 или вызовом метода как свойства конструктора: 
-```this.constructor.STATIC_METHOD_NAME()```.
-
+```
+this.constructor.STATIC_METHOD_NAME()
+```
+.
+```
 class StaticMethodCall {
   constructor() {
     console.log(StaticMethodCall.staticMethod()); 
@@ -106,9 +114,10 @@ console.log(BiggerTriple.triple(3));
 console.log(tp.triple());
 // Выведет сообщение, что "tripple" не является
 // функцией ('tp.tripple is not a function').
-
+```
 
 В ECMAScript 6 вы можете создавать статические функции, используя ключевое слово static :
+```
 class Foo {
   static bar() {return 'I am static.'}
 }
@@ -120,8 +129,7 @@ Foo.bar() // returns 'I am static.'
 var foo = new Foo()
 foo.bar() //-> throws TypeError
 
-
-`class MyClass {
+class MyClass {
     constructor() {
         this._privateVariable = "Private variable";  // Private variable 
         this.publicVariable = "Public variable";  // Public variable 
@@ -132,8 +140,8 @@ foo.bar() //-> throws TypeError
     set privateVariable(val) {
         this._privateVariable = (val < 0) ? 0 : val;
     };
-}`
-
+}
+```
 
 ****************************************************************************
 ### ИНКАПСУЛЯЦИЯ; 
@@ -171,7 +179,7 @@ private. Поэтому атрибуты никогда не являются ч
 private
 Когда тип данных или метод определен как private, только код этого объекта
 сможет получить к нему доступ. 
-
+```
 public class IntSquare {
 // закрытый атрибут
 private int squareValue;
@@ -185,6 +193,7 @@ private int calculateSquare (int value) {
   return value*value;
   }
 }
+```
 Следует отметить, что единственной частью класса, доступной для пользовате-
 лей, является открытый метод getSquare , который относится к интерфейсу. 
 Реализация алгоритма вычисления квадратов чисел заключена в закрытом методе
@@ -269,13 +278,13 @@ https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Classes/extends
 
 Ключевое слово extends используется в объявлении класса или в выражениях класса 
 для создания дочернего класса.
-
+```
 class Square extends Polygon {
   constructor(length) {
     super(length, length);
     this.name = 'Square';
   }
-
+```
 Метод Object.create() создаёт новый объект с указанными объектом прототипа и свойствами.
 https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Object/create
 
@@ -323,7 +332,6 @@ https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Global_Objects/Ob
 
 Допустим, у вас есть абстрактный класс Shape. Он является абстрактным потому, что 
 у него есть абстрактный метод draw() и нельзя создать экземпляр класса Shape.
-
 
 
 В UML-диаграмме
@@ -375,7 +383,7 @@ https://habr.com/post/354046/
 «у машины есть корпус,  колёса и двигатель».
 Пожалуй, наиболее интуитивно понятной формой композиции является агрегация.
 Агрегация означает, что сложный объект состоит из других объектов.
-
+```
 class Professor;
 
 class Department
@@ -395,6 +403,7 @@ public:
         : _partner1(partner1), _partner2(partner2)
     { }
 };
+```
 
 #### КОМПОЗИЦИЯ (composition)
 Композиция (агрегирование по значению) — более строгий вариант агрегирования, когда 
@@ -462,12 +471,12 @@ https://habr.com/post/177447/
 3. Ну и последний минус — это конечно же производительность. Если объектов-владельцев достаточно много, то создание и уничтожение вместо одного объекта двух или более может не остаться незамеченным.
 
 #### Как не надо наследовать. Пример 1
-
+```
 class Stack extends ArrayList {
     public void push(Object value) { … }
     public Object pop() { … }
 }
-
+```
 Казалось бы, класс Stack, все хорошо. Но посмотрите внимательно на его интерфейс. Что должно быть в классе с именем Stack? Методы push() и pop(), что же еще. А у нас? У нас есть get(), set(), add(), remove(), clear() и еще куча барахла, доставшегося от ArrayList, которое стеку ну вообще не нужно.
 
 Можно было бы переопределить все нежелательные методы, а некоторые (например, clear()) даже и адаптировать под наши нужды, но не многовато ли работы из-за одной ошибки в дизайне? На самом деле трех: одной смысловой, одной механической и одной комбинированной:
@@ -478,7 +487,6 @@ class Stack extends ArrayList {
 Ну и наконец, реализуя стек через ArrayList мы смешиваем две разные предметные области: ArrayList — это коллекция с произвольным доступом, а стек — это понятие из мира очередей, со строго ограниченным (а не произвольным)8 доступом.
 
 Последний пункт — незначительная на первый взгляд, но важная вещь. Посмотрим на нее пристальнее.
-
 
 
 ****************************************************************************
@@ -614,11 +622,14 @@ C++ специальным образом проследит за создани
 образом, когда подкласс проектируется с намерением реализовать контракт, он
 должен обеспечивать реализацию нереализованных методов в родительском клас-
 се или интерфейсе.
+```
 public interface Nameable {
   public String getName();
   public void setName(String aName);
 }
+```
 Новые классы Planet , Car и Dog должны выглядеть так:
+```
 public class Planet implements Nameable {
   String planetName;
   public String getName() {return planetName;}
@@ -629,7 +640,7 @@ public class Car implements Nameable {
   public String getName() {return carName;}
   public void setName(String myName) { carName = myName;}
 }
-
+```
 Обобщить в двух словах — если необходимо создать экземпляр объекта, при этом получив преимущества проверки типов таких сущностей как аргументы, возвращаемые типы или generics — имеет смысл использовать класс.
 
 Если вы не создаете экземпляры — в нашем распоряжении есть интерфейсы и их преимущество заключается в том, что при этом не создается какой-либо дополнительного кода, но предоставляется возможность “виртуальной” проверки типизации кода.
