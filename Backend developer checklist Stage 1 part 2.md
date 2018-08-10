@@ -426,12 +426,22 @@ SELECT '[1, 2, 3]'::jsonb @> '[1, 2, 2]'::jsonb;
 Этот запрос получает имена сотрудников, зарплата которых изменилась во втором квартале:
 ```
 SELECT name FROM sal_emp WHERE pay_by_quarter[1] <> pay_by_quarter[2];
-```
+
  name
 -------
  Carol
 (1 row)
+```
 #### По умолчанию в Postgres Pro действует соглашение о нумерации элементов массива с 1, то есть в массиве из n элементов первым считается array[1], а последним — array[n].
+этот запрос получает первые пункты в графике Билла в первые два дня недели:
+```
+SELECT schedule[1:2][1:1] FROM sal_emp WHERE name = 'Bill';
+
+        schedule
+------------------------
+ {{meeting},{training}}
+(1 row)
+```
 
 
 **Полнотекстовый поиск** (или просто поиск текста) — это возможность находить документы на естественном языке, соответствующие запросу, и, возможно, дополнительно сортировать их по релевантности для этого запроса. Наиболее распространённая задача — найти все документы, содержащие слова запроса, и выдать их отсортированными по степени соответствия запросу.  
@@ -519,8 +529,45 @@ SELECT b, char_length(b) FROM test2;
  too l |           5
 ```
 
+```
+CREATE TABLE products (
+    product_no integer PRIMARY KEY,
+    name text UNIQUE,
+    price numeric NOT NULL CHECK (price > 0),
+    discounted_price numeric CHECK (discounted_price > 0),
+    CHECK (price > discounted_price)
+);
+CREATE TABLE orders (
+    order_id integer PRIMARY KEY,
+    product_no integer REFERENCES products (product_no),
+    quantity integer
+);
+CREATE TABLE t1 (
+  a integer PRIMARY KEY,
+  b integer,
+  c integer,
+  FOREIGN KEY (b, c) REFERENCES other_table (c1, c2)
+);
+```
+Внешний ключ также может ссылаться на группу столбцов. В этом случае его нужно записать в виде обычного 
+ограничения таблицы. Число и типы столбцов в ограничении должны соответствовать числу и типам целевых столбцов.
+```
+CREATE TABLE order_items (
+    product_no integer REFERENCES products,
+    order_id integer REFERENCES orders,
+    quantity integer,
+    PRIMARY KEY (product_no, order_id)
+);
+```
+В последней таблице первичный ключ покрывает внешние ключи.
+
+
 #### Read
+
+
 #### Update
+
+
 #### Delete
 
 
