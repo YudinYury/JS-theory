@@ -378,6 +378,24 @@ rect = new Square();
 *
 https://postgrespro.ru/docs/postgrespro/9.6/datatype
 
+Преобразования типов real и double precision так же возможны через тип numeric, например:
+```
+SELECT '12.34'::float8::numeric::money;
+
+CREATE TYPE mood AS ENUM ('sad', 'ok', 'happy');
+```
+Порядок значений в перечислении определяется последовательностью, в которой были указаны значения при создании типа. Перечисления поддерживаются всеми стандартными операторами сравнения и связанными агрегатными функциями. Например:
+```
+INSERT INTO person VALUES ('Larry', 'sad');
+INSERT INTO person VALUES ('Curly', 'ok');
+SELECT * FROM person WHERE current_mood > 'sad';
+ name  | current_mood 
+-------+--------------
+ Moe   | happy
+ Curly | ok
+(2 rows)
+```
+
 
 ****************************************************************************
 ### Связи между таблицами
@@ -389,11 +407,53 @@ https://postgrespro.ru/docs/postgrespro/9.6/datatype
 
 ****************************************************************************
 ### CRUD операции
-Creat
+Create
 Read
 Update
 Delete
 *
+#### Create
+```
+CREATE TABLE имя_таблицы (
+    имя_столбца SERIAL
+);
+```
+равнозначна следующим командам:
+```
+CREATE SEQUENCE имя_таблицы_имя_столбца_seq;
+CREATE TABLE имя_таблицы (
+    имя_столбца integer NOT NULL DEFAULT nextval('имя_таблицы_имя_столбца_seq')
+);
+ALTER SEQUENCE имя_таблицы_имя_столбца_seq OWNED BY имя_таблицы.имя_столбца;
+```
+```
+CREATE TABLE test1 (a character(4));
+INSERT INTO test1 VALUES ('ok');
+SELECT a, char_length(a) FROM test1; -- (1)
+
+  a   | char_length
+------+-------------
+ ok   |           2
+
+
+CREATE TABLE test2 (b varchar(5));
+INSERT INTO test2 VALUES ('ok');
+INSERT INTO test2 VALUES ('good      ');
+INSERT INTO test2 VALUES ('too long');
+ОШИБКА:  значение не умещается в тип character varying(5)
+INSERT INTO test2 VALUES ('too long'::varchar(5)); -- явное усечение
+SELECT b, char_length(b) FROM test2;
+
+   b   | char_length
+-------+-------------
+ ok    |           2
+ good  |           5
+ too l |           5
+```
+
+#### Read
+#### Update
+#### Delete
 
 
 ****************************************************************************
@@ -408,24 +468,6 @@ Delete
 ### Сортировка
 *
 
-****************************************************************************
-### Ключевые слова distinct, cascade, having, copy, returning
-*
-
-****************************************************************************
-### Вложенные запросы, with
-*
-
-****************************************************************************
-### Нормальные формы, аномалии включения/обновления/удаления
-*
-
-****************************************************************************
-### Транзакции
-*
-
-****************************************************************************
-### Основы window functions
 
 
 ****************************************************************************
