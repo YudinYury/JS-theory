@@ -562,10 +562,27 @@ CREATE TABLE order_items (
 В последней таблице первичный ключ покрывает внешние ключи.
 
 
+
 #### Read
 
 
 #### Update
+Добавить столбец вы можете так:
+```
+ALTER TABLE products ADD COLUMN description text;
+```
+
+Удалить столбец можно так:
+```
+ALTER TABLE products DROP COLUMN description;
+```
+```
+ALTER TABLE [ IF EXISTS ] имя RENAME TO новое_имя
+ALTER TABLE [ IF EXISTS ] имя [ * ] действие [, ... ]
+ALTER TABLE [ IF EXISTS ] имя [ * ] DROP [ COLUMN ] [ IF EXISTS ] имя_столбца [ RESTRICT | CASCADE ]
+ALTER TABLE [ IF EXISTS ] имя [ * ] ALTER [ COLUMN ] имя_столбца SET ( атрибут = значение [, ... ] )
+```
+
 
 
 #### Delete
