@@ -220,7 +220,9 @@ CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXI
     | ограничение_таблицы }
     [, ... ]
 ) ]
-
+```
+Проще:
+```
 CREATE TABLE имя_таблицы (
     имя_столбца SERIAL
 );
