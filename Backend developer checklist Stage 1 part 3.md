@@ -209,8 +209,8 @@ Create
 Read
 Update
 Delete
-
 *
+
 #### CREATE
 В общем виде:
 ```
