@@ -212,7 +212,15 @@ Delete
 
 *
 #### CREATE
+В общем виде:
 ```
+CREATE [ [ GLOBAL | LOCAL ] { TEMPORARY | TEMP } | UNLOGGED ] TABLE [ IF NOT EXISTS ] имя_таблицы
+    OF имя_типа [ (
+  { имя_столбца WITH OPTIONS [ ограничение_столбца [ ... ] ]
+    | ограничение_таблицы }
+    [, ... ]
+) ]
+
 CREATE TABLE имя_таблицы (
     имя_столбца SERIAL
 );
