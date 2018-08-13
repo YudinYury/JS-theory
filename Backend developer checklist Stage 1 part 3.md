@@ -126,6 +126,29 @@ WHERE mid = did AND mid = 12;
 *
 https://postgrespro.ru/docs/postgrespro/9.6/ddl-constraints#ddl-constraints-fk
 
+Ограничение первичного ключа означает, что образующий его столбец или группа столбцов может быть уникальным идентификатором строк в таблице. Для этого требуется, чтобы значения были одновременно уникальными и отличными 
+от NULL. Таким образом, таблицы со следующими двумя определениями будут принимать одинаковые данные:
+```
+CREATE TABLE products (
+    product_no integer UNIQUE NOT NULL,
+    name text,
+    price numeric
+);
+CREATE TABLE products (
+    product_no integer PRIMARY KEY,
+    name text,
+    price numeric
+);
+```
+Первичные ключи могут включать несколько столбцов; синтаксис похож на запись ограничений уникальности:
+```
+CREATE TABLE example (
+    a integer,
+    b integer,
+    c integer,
+    PRIMARY KEY (a, c)
+);
+```
 Ограничение внешнего ключа указывает, что значения столбца (или группы столбцов) должны соответствовать значениям в некоторой строке другой таблицы. Это называется ссылочной целостностью двух связанных таблиц.
 ```
 CREATE TABLE products (
@@ -186,6 +209,7 @@ Create
 Read
 Update
 Delete
+
 *
 #### CREATE
 ```
