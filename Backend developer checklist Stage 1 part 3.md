@@ -187,7 +187,7 @@ Read
 Update
 Delete
 *
-#### Create
+#### CREATE
 ```
 CREATE TABLE имя_таблицы (
     имя_столбца SERIAL
@@ -260,7 +260,7 @@ CREATE TABLE order_items (
 
 
 
-#### Read
+#### READ
 SELECT, TABLE, WITH — получить строки из таблицы или представления
 https://postgrespro.ru/docs/postgrespro/9.6/sql-select
 ```
@@ -294,7 +294,7 @@ SELECT DISTINCT исключает из результата повторяющ�
 
 
 
-#### Update
+#### UPDATE
 *
 https://postgrespro.ru/docs/postgrespro/9.6/sql-altertable
 
@@ -317,7 +317,7 @@ ALTER TABLE [ IF EXISTS ] имя [ * ] ALTER [ COLUMN ] имя_столбца SE
 
 
 ****************************************************************************
-#### Delete
+#### DELETE
 *
 https://toster.ru/q/553326
 
