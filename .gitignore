@@ -2,12 +2,15 @@
 .vscode
 .idea
 vscode
+node_modules
+yarn.lock
 
 # Log file
 *.log
 
 # Temp files #
 ts-example.js
+ts-example.ts
 
 # Other Files #
 *.py
