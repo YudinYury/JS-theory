@@ -298,3 +298,16 @@ Promise.all([
   sleepRandom(10)  // через 15 секунд выведет что-то вроде
 ]).then(log);      // => ['foo', 956, 85, 382]
 ```
+
+### instanceof
+```
+function isFish(pet: Fish | Bird): pet is Fish {
+    return pet instanceof Fish;
+}
+
+if (isFish(pet)) {
+    pet.swim();
+} else {
+    pet.fly();
+}
+```
