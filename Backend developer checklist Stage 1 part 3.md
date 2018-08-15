@@ -339,10 +339,6 @@ https://postgrespro.ru/docs/postgrespro/9.6/sql-altertable
 ALTER TABLE products ADD COLUMN description text;
 ```
 
-Удалить столбец можно так:
-```
-ALTER TABLE products DROP COLUMN description;
-```
 ```
 ALTER TABLE [ IF EXISTS ] имя RENAME TO новое_имя
 ALTER TABLE [ IF EXISTS ] имя [ * ] действие [, ... ]
@@ -356,12 +352,18 @@ ALTER TABLE [ IF EXISTS ] имя [ * ] ALTER [ COLUMN ] имя_столбца SE
 *
 https://toster.ru/q/553326
 
-Удаление всех значений в столбце
-UPDATE table SET column = NULL;
-
+Удалить столбец можно так:
+```
+ALTER TABLE products DROP COLUMN description;
+```
 Удаление столбца из таблицы
+```
 ALTER TABLE "table" DROP COLUMN "column"
-
+```
+Удаление всех значений в столбце
+```
+UPDATE table SET column = NULL;
+```
 
 ****************************************************************************
 ### JOIN'ы
