@@ -338,7 +338,7 @@ https://postgrespro.ru/docs/postgrespro/9.6/sql-altertable
 ```
 ALTER TABLE products ADD COLUMN description text;
 ```
-
+Другие операции через ALTER TABLE:
 ```
 ALTER TABLE [ IF EXISTS ] имя RENAME TO новое_имя
 ALTER TABLE [ IF EXISTS ] имя [ * ] действие [, ... ]
