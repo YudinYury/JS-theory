@@ -165,6 +165,7 @@ for (let creator of creators) {
 console.log(products)
 ```
 ... и в новом варианте, а-ля TypeScript, но без указания типов:
+#### FactoryCreator
 ```
 interface SocialHubConnect { PushNewPost() {} }
 
