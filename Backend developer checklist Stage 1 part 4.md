@@ -161,6 +161,7 @@ git add text.txt
 
 Удалить файл:
 git rm text.txt
+
 Текущее состояние репозитория (изменения, неразрешенные конфликты и тп):
 git status
 
@@ -204,6 +205,85 @@ git push  --set-upstream-to origin/target_branch
 ****************************************************************************
 #### Что такое мердж? Как его откатить?
 *
+https://git-scm.com/book/ru/v2/%D0%92%D0%B5%D1%82%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B5-%D0%B2-Git-%D0%9E%D1%81%D0%BD%D0%BE%D0%B2%D1%8B-%D0%B2%D0%B5%D1%82%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D1%8F-%D0%B8-%D1%81%D0%BB%D0%B8%D1%8F%D0%BD%D0%B8%D1%8F
+
+Предположим, вы решили, что работа по проблеме #53 закончена, и ее можно влить в ветку master. Для этого нужно выполнить слияние ветки iss53 точно так же, как вы делали это с веткой hotfix ранее. Все что нужно сделать — переключиться на ветку, в которую вы хотите включить изменения, и выполнить команду git merge:
+```
+$ git checkout master
+Switched to branch 'master'
+$ git merge iss53
+Merge made by the 'recursive' strategy.
+index.html |    1 +
+1 file changed, 1 insertion(+)
+```
+
+**отменить merge**
+
+Есть репозиторий, с двумя бранчами – master и rdsmanager_NG-1.
+
+Изменения в rdsmanager_NG-1 были смерджены в master.
+
+Необходимо отменить это объединение.
+
+Находим “лишний” мердж:
+```
+D:RDSrdsmanager>git log
+commit d22654c64574d1f01ef49f12bf0688c7c9cc3c1d
+Author: Your Name <you@example.com>
+Date:   Wed Sep 2 00:42:05 2015 +0300
+    11
+commit 7bad6f70aa0d10717b55a141e9d85b4305ade67c
+Author: User Name <user@domain.com>
+Date:   Tue Sep 1 17:52:05 2015 +0300
+    NG-6727 RDSmanager user fix
+```
+В данном случае – коммит с ID d22654c64574d1f01ef49f12bf0688c7c9cc3c1d – не нужен.
+
+Выполняем откат до предыдущего коммита:
+```
+D:RDSrdsmanager>git reset --hard 7bad6f70aa0d10717b55a141e9d85b4305ade67c
+HEAD is now at 7bad6f7 NG-6727 RDSmanager user fix
+```
+Сохраняем изменения в самом репозитории:
+```
+D:RDSrdsmanager>git push --force origin master
+Total 0 (delta 0), reused 0 (delta 0)
+To git@bitbucket.domain/rdsmanager.git
+ + d22654c...7bad6f7 master -> master (forced update)
+```
+
+Обозначим начальную ситуацию на следующей схеме:
+```
+               (i) (wt)
+A - B - C - D - ? - ?
+            ↑
+          master
+          (HEAD)
+```
+
+**git stash**
+Эта команда отменяет все индексированные и неиндексированные изменения в рабочей области, сохраняя их в карман (stash).
+```
+git stash save
+```
+Конечное состояние:
+```
+           (wt)
+           (i)           
+A - B - C - D             ?
+            ↑             ↑
+          master      stash{0}
+          (HEAD)
+```
+Восстановление несохраненных изменений: легко и просто.
+```
+git stash apply
+```
+Если stash совсем не нужен, его можно удалить.
+```
+# удалить последнюю запись кармана
+git stash drop
+```
 
 
 ****************************************************************************
