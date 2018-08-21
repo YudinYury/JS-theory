@@ -3,6 +3,12 @@
 ****************************************************************************
 ## Stage 1, part 3 
 
+
+## Node.js
+Вопросы в этом разделе:
+  * Express - как использовать app.use, отдача статики по разным путям, middleware (подключаемые и свои)  
+  * Пакетные менеджеры npm, yarn - установка, удаление, обновление пакетов. Файл package.json.
+
 ## БД
 Вопросы в этом разделе:
   * Типы данных в PostgreSQL
@@ -18,6 +24,57 @@
   * CRUD операции
   * связи между моделями
   * миграции
+
+
+****************************************************************************
+## Node.js
+
+****************************************************************************
+### Express - как использовать app.use, отдача статики по разным путям, middleware (подключаемые и свои)
+*
+http://expressjs.com/ru/guide/routing.html
+
+**как использовать app.use**
+Метод route является производным от одного из методов HTTP и присоединяется к экземпляру класса express.
+
+Приведенный ниже код служит примером маршрутов, определенных для методов запросов GET и POST к корневому каталогу приложения.
+```
+// GET method route
+app.get('/', function (req, res) {
+  res.send('GET request to the homepage');
+});
+
+// POST method route
+app.post('/', function (req, res) {
+  res.send('POST request to the homepage');
+});
+```
+
+В приведенном ниже примере обработчик будет запущен для запросов, адресованных “/secret”, независимо от того, используется ли GET, POST, PUT, DELETE или какой-либо другой метод запроса HTTP, поддерживаемый в модуле http.
+
+```
+app.all('/secret', function (req, res, next) {
+  console.log('Accessing the secret section ...');
+  next(); // pass control to the next handler
+});
+```
+
+**отдача статики по разным путям**
+```
+app.use('/static', express.static('public'));
+```
+Теперь можно загрузить файлы, находящиеся в каталоге public, указанного в префиксе пути /static.
+```
+http://localhost:3000/static/images/kitten.jpg
+http://localhost:3000/static/css/style.css
+http://localhost:3000/static/js/app.js
+http://localhost:3000/static/images/bg.png
+http://localhost:3000/static/hello.html
+```
+Тем не менее, путь, переданный в функцию express.static, указан относительно каталога, из которого запускается процесс node. В случае запуска приложения Express из другого каталога, безопаснее использовать абсолютный путь к каталогу для предоставления файлов:
+```
+app.use('/static', express.static(__dirname + '/public'));
+```
 
 
 ****************************************************************************
