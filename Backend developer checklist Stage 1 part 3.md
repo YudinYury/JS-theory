@@ -483,6 +483,7 @@ http://www.sql-tutorial.ru/ru/book_group_by_clause.html
 
 https://studfiles.net/preview/6196286/page:17/
 
+https://studfiles.net/preview/6196286/page:16/#35
 
 Предложение GROUP BY
 Необязательное предложение GROUP BY имеет общую форму
