@@ -185,7 +185,6 @@ git push origin
 http://gearmobile.github.io/git/fast-forward-git/
 
 
-
 https://urvanov.ru/2017/09/19/%D0%BE%D0%BF%D0%B0%D1%81%D0%BD%D0%BE%D1%81%D1%82%D1%8C-git-push-force-%D0%B8-%D0%BF%D0%BE%D0%BB%D0%B5%D0%B7%D0%BD%D0%BE%D1%81%D1%82%D1%8C-git-push-force-with-lease/
 
 Осторожно: в общем случае команда push --force опасна, так как переписывает состояние ветки на удаленном репозитории и может привести к потерям.
