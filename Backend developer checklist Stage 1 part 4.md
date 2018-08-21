@@ -157,14 +157,17 @@ https://git-scm.com/book/ru/v2
 https://eax.me/git-commands/ 
 
 Добавить файл в репозиторий:
+```
 git add text.txt
-
+```
 Удалить файл:
+```
 git rm text.txt
-
+```
 Текущее состояние репозитория (изменения, неразрешенные конфликты и тп):
+```
 git status
-
+```
 
 ****************************************************************************
 #### Пуш. Что такое фастфовард? Чем опасен пуш с форсом?
@@ -178,6 +181,7 @@ git push origin
 
 
 **fast-forward**
+
 http://gearmobile.github.io/git/fast-forward-git/
 
 
@@ -252,6 +256,7 @@ To git@bitbucket.domain/rdsmanager.git
  + d22654c...7bad6f7 master -> master (forced update)
 ```
 
+
 Обозначим начальную ситуацию на следующей схеме:
 ```
                (i) (wt)
@@ -277,7 +282,7 @@ A - B - C - D             ?
 ```
 Восстановление несохраненных изменений: легко и просто.
 ```
-git stash apply
+git stash apply  #  git stash pop
 ```
 Если stash совсем не нужен, его можно удалить.
 ```
