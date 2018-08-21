@@ -375,7 +375,15 @@ http://evtuhovich.ru/blog/2009/04/03/git-reset/
 ```
 Все это работает, если вы не опубликовали свои изменения. В случае, если вы их опубликовали, то не остается ничего другого, как сделать коммит, который отменяет какой-то коммит:
 ```
-    git revert commit-sha1
+> git log --oneline
+81499da Revert "return main.c from third commit"
+cffc5ad return main.c from third commit
+7f2eb3a fifth commit
+dcf7253 fourth commit
+18411fd third commit
+86f1495 first commit
+
+git revert commit-sha1
 ```
 Ну, а потом опубликовать поскорее его командой git push.
 
