@@ -303,6 +303,8 @@ CREATE TABLE order_items (
 #### READ
 SELECT, TABLE, WITH — получить строки из таблицы или представления
 https://postgrespro.ru/docs/postgrespro/9.6/sql-select
+https://studfiles.net/preview/6196286/page:15/
+
 ```
 SELECT [ ALL | DISTINCT [ ON ( выражение [, ...] ) ] ]
     [ * | выражение [ [ AS ] имя_результата ] [, ...] ]
@@ -485,7 +487,7 @@ https://studfiles.net/preview/6196286/page:17/
 
 https://studfiles.net/preview/6196286/page:16/#35
 
-Предложение GROUP BY
+Предложение **GROUP BY**
 Необязательное предложение GROUP BY имеет общую форму
 ```
 GROUP BY элемент_группирования [, ...]
